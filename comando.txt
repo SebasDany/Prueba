@@ -1,0 +1,10 @@
+git init 
+git add .
+git commit -m "djbfsj"
+git status
+heroku login
+
+
+heroku git:remote -a
+
+git push heroku master
