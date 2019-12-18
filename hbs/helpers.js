@@ -26,10 +26,10 @@ hbs.registerHelper('capitalizar', (texto) => {
     return palabras.join(' ');
 
 });
-
+let getInfo
 hbs.registerHelper("temperatura",()=>{
     let temp
-    let getInfo = async(pais) => {
+    getInfo = async(pais) => {
         try {
             let coords = await ubicacion.getCiudadLatLon(pais);
             temp = await clima.getClima(coords.lat, coords.lon);
@@ -38,11 +38,18 @@ hbs.registerHelper("temperatura",()=>{
             console.log(`No se puede obtener el clima de: ${pais}`);
         }
     };
-    nombre="Guayaquil"
-    getInfo(nombre).then(res => {   
-        console.log(res);
-    }).catch(err => console.log(err));
+    pais("Guayaquil")
+    pais("Quito")
+    pais("Paris")
+    pais("Madrid")
+    
 return temp
    
 
 });
+function pais(nombre){
+ 
+    getInfo(nombre).then(res => {   
+        console.log(res);
+    }).catch(err => console.log(err));
+}
