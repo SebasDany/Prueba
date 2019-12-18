@@ -80,7 +80,7 @@ hbs.registerHelper("madrid",()=>{
     };
   pais("Madrid")
     
-return temp2
+return temp2});
 
 let temp3
 hbs.registerHelper("paris",()=>{
@@ -100,7 +100,7 @@ return temp3
 });
 
 
-});
+
 
 function pais(nombre){
     getInfo(nombre).then(res => {   
