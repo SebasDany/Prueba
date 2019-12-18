@@ -11,6 +11,22 @@ const port=process.env.PORT || 8080
 hbs.registerPartials(__dirname +'/views/parciales')// el dir me dap del nombre del directorio
 app.set('view engine','hbs');
 
+let getInfo  = async(pais) => {
+    try {
+        let coords = await ubicacion.getCiudadLatLon(pais);
+       let temp = await clima.getClima(coords.lat, coords.lon);
+        return temp
+    } catch (error) {
+        console.log(`No se puede obtener el clima de: ${pais}`);
+    }
+};
+    nombre="Guayaquil"
+
+    getInfo(nombre).then(res => {   
+        console.log(res);
+    }).catch(err => console.log(err));
+
+
 //helpers
 // hbs.registerHelper('getAnio',()=>{
 //     return new Date().getFullYear()
@@ -27,6 +43,10 @@ app.set('view engine','hbs');
 app.get('/', function (req, res) {
     res.render('home',{
         nombre:"sebastian GuanDinago",
+        quito:getInfo("Quito"),
+        guayaquil:getInfo("Guayaquil"),
+        madrid:getInfo("Madrid"),
+        paris:getInfo("Paris")
         //anio: new Date().getFullYear()
     });
 

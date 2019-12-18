@@ -26,11 +26,14 @@ hbs.registerHelper('capitalizar', (texto) => {
     return palabras.join(' ');
 
 });
+
+
 let getInfo
 let temp
-hbs.registerHelper("temperatura",()=>{
+
+hbs.registerHelper("quito",()=>{
     
-    getInfo = async(pais) => {
+    getInfo  = async(pais) => {
         try {
             let coords = await ubicacion.getCiudadLatLon(pais);
             temp = await clima.getClima(coords.lat, coords.lon);
@@ -39,17 +42,67 @@ hbs.registerHelper("temperatura",()=>{
             console.log(`No se puede obtener el clima de: ${pais}`);
         }
     };
-    pais("Guayaquil")
-    pais("Quito")
-    pais("Paris")
-    pais("Madrid")
     
-return temp
-   
+    pais("Quito")  
+return temp  
 
 });
+let temp1
+hbs.registerHelper("guay",()=>{
+    
+    getInfo  = async(pais) => {
+        try {
+            let coords = await ubicacion.getCiudadLatLon(pais);
+            temp1 = await clima.getClima(coords.lat, coords.lon);
+            return `El clima en ${coords.name} es de ${temp1} °C`
+        } catch (error) {
+            console.log(`No se puede obtener el clima de: ${pais}`);
+        }
+    };
+  pais("Guayaquil")
+    
+    
+return temp1
+
+  
+
+});
+let temp2
+hbs.registerHelper("madrid",()=>{
+    getInfo  = async(pais) => {
+        try {
+            let coords = await ubicacion.getCiudadLatLon(pais);
+            temp2 = await clima.getClima(coords.lat, coords.lon);
+            return `El clima en ${coords.name} es de ${temp2} °C`
+        } catch (error) {
+            console.log(`No se puede obtener el clima de: ${pais}`);
+        }
+    };
+  pais("Madrid")
+    
+return temp2
+
+let temp3
+hbs.registerHelper("paris",()=>{
+    getInfo  = async(pais) => {
+        try {
+            let coords = await ubicacion.getCiudadLatLon(pais);
+            temp3 = await clima.getClima(coords.lat, coords.lon);
+            return `El clima en ${coords.name} es de ${temp3} °C`
+        } catch (error) {
+            console.log(`No se puede obtener el clima de: ${pais}`);
+        }
+    };
+  pais("Paris")
+    
+    
+return temp3
+});
+
+
+});
+
 function pais(nombre){
- 
     getInfo(nombre).then(res => {   
         console.log(res);
     }).catch(err => console.log(err));
