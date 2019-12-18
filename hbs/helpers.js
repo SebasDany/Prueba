@@ -27,8 +27,9 @@ hbs.registerHelper('capitalizar', (texto) => {
 
 });
 let getInfo
+let temp
 hbs.registerHelper("temperatura",()=>{
-    let temp
+    
     getInfo = async(pais) => {
         try {
             let coords = await ubicacion.getCiudadLatLon(pais);
