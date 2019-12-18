@@ -1,4 +1,14 @@
 const hbs = require('hbs');
+const ubicacion = require('../controlador/ubicacion')
+const clima = require('../controlador/clima')
+const argv = require('yargs').options({
+    nombre: {
+        alias: 'n',
+        desc: 'Nombre de la ciudad para obtener el clima',
+        demand: false
+    }
+}).argv;
+
 
 
 // helpers
@@ -14,5 +24,28 @@ hbs.registerHelper('capitalizar', (texto) => {
     });
 
     return palabras.join(' ');
+
+});
+
+hbs.registerHelper("temperatura",()=>{
+    let getInfo = async(pais) => {
+        try {
+            let coords = await ubicacion.getCiudadLatLon(pais);
+            let temp = await clima.getClima(coords.lat, coords.lon);
+            return `El clima en ${coords.name} es de ${temp} °C`
+        } catch (error) {
+            console.log(`No se puede obtener el clima de: ${pais}`);
+        }
+    };
+    nombre="Guayaquil"
+    getInfo(nombre).then(res => {
+        let respuesta=res
+        return respuesta
+        console.log(res);
+    }).catch(err => console.log(err));
+
+    
+
+   
 
 });

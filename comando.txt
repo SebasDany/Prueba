@@ -8,3 +8,9 @@ heroku login
 heroku git:remote -a
 
 git push heroku master
+
+ git init
+ git add .  
+ git commit -am "make it better"  
+  heroku git:remote -a sebas-website
+  git push heroku master
