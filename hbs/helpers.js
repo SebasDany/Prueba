@@ -28,24 +28,21 @@ hbs.registerHelper('capitalizar', (texto) => {
 });
 
 hbs.registerHelper("temperatura",()=>{
+    let temp
     let getInfo = async(pais) => {
         try {
             let coords = await ubicacion.getCiudadLatLon(pais);
-            let temp = await clima.getClima(coords.lat, coords.lon);
+            temp = await clima.getClima(coords.lat, coords.lon);
             return `El clima en ${coords.name} es de ${temp} °C`
         } catch (error) {
             console.log(`No se puede obtener el clima de: ${pais}`);
         }
     };
     nombre="Guayaquil"
-    getInfo(nombre).then(res => {
-        let respuesta=res
-        return respuesta
+    getInfo(nombre).then(res => {   
         console.log(res);
     }).catch(err => console.log(err));
-
-    
-return getInfo
+return temp
    
 
 });
