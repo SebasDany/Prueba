@@ -45,7 +45,7 @@ hbs.registerHelper("temperatura",()=>{
     }).catch(err => console.log(err));
 
     
-
+return getInfo
    
 
 });
